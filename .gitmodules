@@ -1,0 +1,9 @@
+[submodule "Fractatrix.Shared"]
+	path = Fractatrix.Shared
+	url = https://github.com/Largosaki/Fractatrix.Shared.git
+[submodule "Fractatrix.ATDebug"]
+	path = Fractatrix.ATDebug
+	url = https://github.com/Largosaki/Fractatrix.ATDebug.git
+[submodule "FractatrixGodot"]
+	path = FractatrixGodot
+	url = https://github.com/Largosaki/FractatrixGodot.git

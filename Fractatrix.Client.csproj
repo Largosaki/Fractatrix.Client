@@ -12,9 +12,10 @@
     <PackageReference Include="MessagePack" Version="3.1.4" />
   </ItemGroup>
 
-  <!-- Fractatrix.Shared is a sibling repo at ../Fractatrix/Fractatrix.Shared/ -->
+  <!-- Fractatrix.Shared: nested submodule (primary) or sibling in main repo (fallback) -->
   <ItemGroup>
-    <ProjectReference Include="..\Fractatrix\Fractatrix.Shared\Fractatrix.Shared.csproj" />
+    <ProjectReference Include="Fractatrix.Shared\Fractatrix.Shared.csproj" Condition="Exists('Fractatrix.Shared\Fractatrix.Shared.csproj')" />
+    <ProjectReference Include="..\Fractatrix.Shared\Fractatrix.Shared.csproj" Condition="!Exists('Fractatrix.Shared\Fractatrix.Shared.csproj')" />
   </ItemGroup>
 
 </Project>
