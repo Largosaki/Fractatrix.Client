@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <RootNamespace>Fractatrix.Client.Core</RootNamespace>
+    <AssemblyName>Fractatrix.Client</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MessagePack" Version="3.1.4" />
+  </ItemGroup>
+
+  <!-- Fractatrix.Shared is a sibling repo at ../Fractatrix/Fractatrix.Shared/ -->
+  <ItemGroup>
+    <ProjectReference Include="..\Fractatrix\Fractatrix.Shared\Fractatrix.Shared.csproj" />
+  </ItemGroup>
+
+</Project>
