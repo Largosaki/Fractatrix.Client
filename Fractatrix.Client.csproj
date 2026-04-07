@@ -12,10 +12,15 @@
     <PackageReference Include="MessagePack" Version="3.1.4" />
   </ItemGroup>
 
-  <!-- Fractatrix.Shared: nested submodule (primary) or sibling in main repo (fallback) -->
+  <!-- Exclude submodule source trees from this project's compilation -->
   <ItemGroup>
-    <ProjectReference Include="Fractatrix.Shared\Fractatrix.Shared.csproj" Condition="Exists('Fractatrix.Shared\Fractatrix.Shared.csproj')" />
-    <ProjectReference Include="..\Fractatrix.Shared\Fractatrix.Shared.csproj" Condition="!Exists('Fractatrix.Shared\Fractatrix.Shared.csproj')" />
+    <Compile Remove="Fractatrix.Shared\**" />
+    <Compile Remove="Fractatrix.ATDebug\**" />
+    <Compile Remove="FractatrixGodot\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="$(SharedRoot)Fractatrix.Shared.csproj" />
   </ItemGroup>
 
 </Project>

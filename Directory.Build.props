@@ -1,0 +1,13 @@
+<Project>
+  <PropertyGroup>
+    <!--
+      SharedRoot resolves Fractatrix.Shared regardless of layout:
+        (a) nested submodule inside this repo  — CI / standalone clone
+            Fractatrix.Client/Fractatrix.Shared/
+        (b) sibling at top-level monorepo      — local dev (main Fractatrix repo)
+            Fractatrix/Fractatrix.Shared/
+    -->
+    <SharedRoot Condition="Exists('$(MSBuildThisFileDirectory)Fractatrix.Shared\Fractatrix.Shared.csproj')">$(MSBuildThisFileDirectory)Fractatrix.Shared\</SharedRoot>
+    <SharedRoot Condition="'$(SharedRoot)' == '' AND Exists('$(MSBuildThisFileDirectory)..\Fractatrix.Shared\Fractatrix.Shared.csproj')">$(MSBuildThisFileDirectory)..\Fractatrix.Shared\</SharedRoot>
+  </PropertyGroup>
+</Project>
