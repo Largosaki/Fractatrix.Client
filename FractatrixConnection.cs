@@ -13,7 +13,7 @@ namespace Fractatrix.Client.Core;
 /// </summary>
 public sealed class FractatrixConnection
 {
-    internal static readonly MessagePackSerializerOptions MsgOpts =
+    public static readonly MessagePackSerializerOptions MsgOpts =
         MessagePackSerializerOptions.Standard.WithResolver(
             CompositeResolver.Create(StandardResolver.Instance, ContractlessStandardResolver.Instance));
 
