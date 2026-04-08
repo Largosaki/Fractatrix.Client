@@ -75,6 +75,79 @@ public static class ChunkDecoder
             data.AsSpan(flatIndex * 4, 4));
     }
 
+    private const int BlockCount = 32768; // 32^3
+
+    /// <summary>
+    /// Decode all 32768 blocks from chunk storage data into an int[] array.
+    /// Used by rendering clients that need the full block grid.
+    /// Returns null if format is unrecognised or data is malformed.
+    /// </summary>
+    public static int[]? DecodeAll(byte typeTag, byte[] data)
+    {
+        return typeTag switch
+        {
+            0 => DecodeAllUni(data),
+            1 => DecodeAllRle(data),
+            2 => DecodeAllPlate(data),
+            3 => DecodeAllFlat(data),
+            _ => null,
+        };
+    }
+
+    private static int[]? DecodeAllUni(byte[] data)
+    {
+        if (data.Length < 4) return null;
+        int stateId = BinaryPrimitives.ReadInt32LittleEndian(data.AsSpan(0, 4));
+        var blocks = new int[BlockCount];
+        Array.Fill(blocks, stateId);
+        return blocks;
+    }
+
+    private static int[]? DecodeAllRle(byte[] data)
+    {
+        if (data.Length < 4) return null;
+        var span = data.AsSpan();
+        int runCount = BinaryPrimitives.ReadInt32LittleEndian(span);
+        var blocks = new int[BlockCount];
+        int pos = 0, offset = 4;
+        for (int r = 0; r < runCount; r++)
+        {
+            if (offset + 8 > data.Length) return null;
+            int stateId = BinaryPrimitives.ReadInt32LittleEndian(span.Slice(offset, 4));
+            int count   = BinaryPrimitives.ReadInt32LittleEndian(span.Slice(offset + 4, 4));
+            offset += 8;
+            Array.Fill(blocks, stateId, pos, count);
+            pos += count;
+        }
+        return blocks;
+    }
+
+    private static int[]? DecodeAllPlate(byte[] data)
+    {
+        if (data.Length < 2) return null;
+        var span = data.AsSpan();
+        int paletteCount = BinaryPrimitives.ReadUInt16LittleEndian(span);
+        int indicesStart = 2 + paletteCount * 4;
+        if (data.Length < indicesStart + BlockCount) return null;
+        var palette = new int[paletteCount];
+        for (int i = 0; i < paletteCount; i++)
+            palette[i] = BinaryPrimitives.ReadInt32LittleEndian(span.Slice(2 + i * 4, 4));
+        var blocks = new int[BlockCount];
+        for (int i = 0; i < BlockCount; i++)
+            blocks[i] = palette[span[indicesStart + i]];
+        return blocks;
+    }
+
+    private static int[]? DecodeAllFlat(byte[] data)
+    {
+        if (data.Length < BlockCount * 4) return null;
+        var span = data.AsSpan();
+        var blocks = new int[BlockCount];
+        for (int i = 0; i < BlockCount; i++)
+            blocks[i] = BinaryPrimitives.ReadInt32LittleEndian(span.Slice(i * 4, 4));
+        return blocks;
+    }
+
     /// <summary>Compute SHA256 of chunk data, returned as base64.</summary>
     public static string Sha256(byte[] data)
     {
