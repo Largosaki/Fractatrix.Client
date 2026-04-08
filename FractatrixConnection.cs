@@ -19,7 +19,7 @@ public sealed class FractatrixConnection
 
     private static readonly TimeSpan ConnectTimeout = TimeSpan.FromSeconds(10);
     private static readonly TimeSpan SendTimeout = TimeSpan.FromSeconds(5);
-    private const uint MaxPayloadBytes = 16 * 1024 * 1024;
+    private const uint MaxPayloadBytes = 256 * 1024;  // 256 KB — largest legit packet is a full flat chunk (~128 KB)
 
     private ClientWebSocket? _socket;
     private readonly SemaphoreSlim _sendLock = new(1, 1);
