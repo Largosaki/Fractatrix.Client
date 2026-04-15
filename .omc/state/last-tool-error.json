@@ -1,0 +1,7 @@
+{
+  "tool_name": "Read",
+  "tool_input_preview": "{\"file_path\":\"D:\\\\chordrepos\\\\Fractatrix\\\\FractatrixGodot\\\\Scripts\\\\UI\\\\InventoryUI.cs\"}",
+  "error": "File does not exist. Note: your current working directory is D:\\chordrepos\\Fractatrix\\Fractatrix.Client. Did you mean D:\\chordrepos\\Fractatrix\\Fractatrix.Client\\FractatrixGodot\\Scripts\\UI\\InventoryUI.cs?",
+  "timestamp": "2026-04-14T08:32:27.656Z",
+  "retry_count": 3
+}

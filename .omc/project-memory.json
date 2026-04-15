@@ -1,0 +1,317 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1776069973463,
+  "projectRoot": "D:\\chordrepos\\Fractatrix\\Fractatrix.Client",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "bin"
+    ],
+    "gitBranches": {
+      "defaultBranch": "master",
+      "branchingStrategy": null
+    }
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "bin": {
+      "path": "bin",
+      "purpose": "Executable scripts",
+      "fileCount": 0,
+      "lastAccessed": 1776069973448,
+      "keyFiles": []
+    },
+    "Fractatrix.ATDebug": {
+      "path": "Fractatrix.ATDebug",
+      "purpose": null,
+      "fileCount": 8,
+      "lastAccessed": 1776069973449,
+      "keyFiles": [
+        "CLAUDE.md",
+        "Dtos.cs",
+        "Fractatrix.ATDebug.csproj",
+        "Fractatrix.ATDebug.slnx",
+        "GameClient.cs"
+      ]
+    },
+    "FractatrixGodot": {
+      "path": "FractatrixGodot",
+      "purpose": null,
+      "fileCount": 10,
+      "lastAccessed": 1776069973450,
+      "keyFiles": [
+        "CLAUDE.md",
+        "export_presets.cfg",
+        "Fractatrix.Godot.csproj",
+        "FractatrixGodot.csproj",
+        "icon.svg"
+      ]
+    },
+    "obj": {
+      "path": "obj",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1776069973450,
+      "keyFiles": [
+        "Fractatrix.Client.csproj.nuget.dgspec.json",
+        "Fractatrix.Client.csproj.nuget.g.props",
+        "Fractatrix.Client.csproj.nuget.g.targets",
+        "project.assets.json",
+        "project.nuget.cache"
+      ]
+    },
+    "Fractatrix.ATDebug\\bin": {
+      "path": "Fractatrix.ATDebug\\bin",
+      "purpose": "Executable scripts",
+      "fileCount": 0,
+      "lastAccessed": 1776069973451,
+      "keyFiles": []
+    },
+    "FractatrixGodot\\docs": {
+      "path": "FractatrixGodot\\docs",
+      "purpose": "Documentation",
+      "fileCount": 0,
+      "lastAccessed": 1776069973451,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\ChunkMeshBuilder.cs",
+      "accessCount": 33,
+      "lastAccessed": 1776100851315,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\ChunkManager.cs",
+      "accessCount": 23,
+      "lastAccessed": 1776100676741,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Network\\FluidHandler.cs",
+      "accessCount": 15,
+      "lastAccessed": 1776100619821,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 11,
+      "lastAccessed": 1776100463770,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot",
+      "accessCount": 9,
+      "lastAccessed": 1776100347223,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\BlockColorTable.cs",
+      "accessCount": 7,
+      "lastAccessed": 1776070060875,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\ChunkData.cs",
+      "accessCount": 7,
+      "lastAccessed": 1776100626081,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Entities\\EntityView.cs",
+      "accessCount": 6,
+      "lastAccessed": 1775808310148,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\UI\\DebugOverlayUI.cs",
+      "accessCount": 6,
+      "lastAccessed": 1776070613663,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\ChunkObject.cs",
+      "accessCount": 6,
+      "lastAccessed": 1776083020017,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Shaders\\underwater_post.gdshader",
+      "accessCount": 5,
+      "lastAccessed": 1775901397440,
+      "type": "file"
+    },
+    {
+      "path": "Fractatrix.ATDebug\\GameClient.cs",
+      "accessCount": 5,
+      "lastAccessed": 1776100463207,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\UI\\HudUI.cs",
+      "accessCount": 5,
+      "lastAccessed": 1776155657895,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\UnderwaterEffect.cs",
+      "accessCount": 4,
+      "lastAccessed": 1775901396990,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\docs\\server-changes\\pending\\2026-04-01-fluid-system-overhaul.md",
+      "accessCount": 4,
+      "lastAccessed": 1775902050732,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World",
+      "accessCount": 4,
+      "lastAccessed": 1776082848293,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\GameSceneBootstrap.cs",
+      "accessCount": 4,
+      "lastAccessed": 1776085964308,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Entities\\EntityRegistry.cs",
+      "accessCount": 3,
+      "lastAccessed": 1775808267070,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Shaders\\chunk_water.gdshader",
+      "accessCount": 3,
+      "lastAccessed": 1776070048523,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\World\\ChunkObjectPool.cs",
+      "accessCount": 3,
+      "lastAccessed": 1776082898991,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\UI\\ChatUI.cs",
+      "accessCount": 3,
+      "lastAccessed": 1776155613321,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\UI\\InventoryUI.cs",
+      "accessCount": 3,
+      "lastAccessed": 1776155706511,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Player",
+      "accessCount": 2,
+      "lastAccessed": 1775808077135,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Entities",
+      "accessCount": 2,
+      "lastAccessed": 1775808108249,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Network\\WorldInitHandler.cs",
+      "accessCount": 2,
+      "lastAccessed": 1775901405136,
+      "type": "file"
+    },
+    {
+      "path": "ChunkDecoder.cs",
+      "accessCount": 2,
+      "lastAccessed": 1775901427018,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\docs\\server-changes\\pending\\2026-04-01-fluid-rendering-protocol.md",
+      "accessCount": 2,
+      "lastAccessed": 1775901497902,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Player\\PlayerController.cs",
+      "accessCount": 2,
+      "lastAccessed": 1776082215831,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts",
+      "accessCount": 2,
+      "lastAccessed": 1776155662334,
+      "type": "directory"
+    },
+    {
+      "path": "ClientPacketRouter.cs",
+      "accessCount": 1,
+      "lastAccessed": 1775808006071,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Player\\PlayerCamera.cs",
+      "accessCount": 1,
+      "lastAccessed": 1775808010417,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Network",
+      "accessCount": 1,
+      "lastAccessed": 1775808028640,
+      "type": "directory"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Network\\PacketSerializer.cs",
+      "accessCount": 1,
+      "lastAccessed": 1775808028758,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Shaders\\chunk_opaque.gdshader",
+      "accessCount": 1,
+      "lastAccessed": 1775904016891,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\UI\\WaterLevelOverlay.cs",
+      "accessCount": 1,
+      "lastAccessed": 1776070580701,
+      "type": "file"
+    },
+    {
+      "path": "FractatrixGodot\\Scripts\\Autoloads\\UIState.cs",
+      "accessCount": 1,
+      "lastAccessed": 1776155598945,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}
