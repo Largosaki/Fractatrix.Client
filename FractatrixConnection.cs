@@ -13,9 +13,14 @@ namespace Fractatrix.Client.Core;
 /// </summary>
 public sealed class FractatrixConnection
 {
+    // MessagePack options: StandardResolver only (all packets use [MessagePackObject] + [Key]).
+    // UntrustedData security profile caps graph depth to protect against deserialization bombs.
+    // Must stay in lockstep with Fractatrix.Shared.Protocol.FractatrixResolver.Options.
     public static readonly MessagePackSerializerOptions MsgOpts =
-        MessagePackSerializerOptions.Standard.WithResolver(
-            CompositeResolver.Create(StandardResolver.Instance, ContractlessStandardResolver.Instance));
+        MessagePackSerializerOptions.Standard
+            .WithResolver(StandardResolver.Instance)
+            .WithSecurity(MessagePackSecurity.UntrustedData
+                .WithMaximumObjectGraphDepth(Fractatrix.Shared.Constants.MessagePackMaxDepth));
 
     private static readonly TimeSpan ConnectTimeout = TimeSpan.FromSeconds(10);
     private static readonly TimeSpan SendTimeout = TimeSpan.FromSeconds(5);
