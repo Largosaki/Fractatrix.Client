@@ -155,17 +155,22 @@ public static class ChunkDecoder
         return Convert.ToBase64String(hash);
     }
 
-    /// <summary>World coord → chunk coord (floor division by 32).</summary>
-    public static (int cx, int cy, int cz) WorldToChunk(long wx, long wy, long wz)
+    public const int ChunkSize = 32;
+
+    /// <summary>World coord → chunk coord (floor division by 32) for one axis.</summary>
+    public static int WorldToChunk(long w)
     {
-        static int FloorDiv(long a, long b)
-        {
-            int q = (int)(a / b);
-            if ((a ^ b) < 0 && a % b != 0) q--;
-            return q;
-        }
-        return (FloorDiv(wx, 32), FloorDiv(wy, 32), FloorDiv(wz, 32));
+        int q = (int)(w / ChunkSize);
+        if ((w ^ ChunkSize) < 0 && w % ChunkSize != 0) q--;
+        return q;
     }
+
+    /// <summary>World coord → chunk coord for all three axes.</summary>
+    public static (int cx, int cy, int cz) WorldToChunk(long wx, long wy, long wz) =>
+        (WorldToChunk(wx), WorldToChunk(wy), WorldToChunk(wz));
+
+    /// <summary>World coord → local coord within chunk (0..31) for one axis.</summary>
+    public static int WorldToLocal(long w) => (int)(((w % ChunkSize) + ChunkSize) % ChunkSize);
 
     /// <summary>World coord → flat index within chunk. Layout: (ly &lt;&lt; 10) | (lz &lt;&lt; 5) | lx</summary>
     public static int WorldToFlatIndex(long wx, long wy, long wz)

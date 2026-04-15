@@ -188,21 +188,38 @@ public sealed class FractatrixConnection
     /// Caller loops until the sentinel is received.
     ///
     /// <para>The returned payload is a freshly-allocated byte[] sized exactly to the payload
-    /// length. For pooled (zero-alloc steady-state) reads see <see cref="ReceiveOnePooledAsync"/>.</para>
+    /// length. The header is read via a pooled scratch buffer so the only per-packet allocation
+    /// is the payload array itself — no intermediate copy. For zero-alloc steady-state reads
+    /// (where the caller can release the buffer after dispatch) see <see cref="ReceiveOnePooledAsync"/>.</para>
     /// </summary>
     public async Task<(ushort Id, byte[] Payload)> ReceiveOneAsync(CancellationToken ct = default)
     {
-        var pooled = await ReceiveOnePooledAsync(ct);
+        var socket = _socket;
+        if (socket is null) return (0xFFFF, []);
+        byte[]? header = null;
         try
         {
-            if (pooled.Id == 0xFFFF && pooled.Length == 0) return (0xFFFF, []);
-            var copy = new byte[pooled.Length];
-            Buffer.BlockCopy(pooled.Buffer, 0, copy, 0, pooled.Length);
-            return (pooled.Id, copy);
+            header = ArrayPool<byte>.Shared.Rent(6);
+            if (!await ReadExactAsync(socket, header, 6, ct)) return (0xFFFF, []);
+
+            ushort packetId = BinaryPrimitives.ReadUInt16BigEndian(header.AsSpan(0, 2));
+            uint length = BinaryPrimitives.ReadUInt32BigEndian(header.AsSpan(2, 4));
+
+            if (length > MaxPayloadBytes) return (0xFFFF, []);
+
+            var payload = length == 0 ? Array.Empty<byte>() : new byte[length];
+            if (length > 0 && !await ReadExactAsync(socket, payload, (int)length, ct))
+                return (0xFFFF, []);
+
+            Interlocked.Add(ref _rxBytes, 6 + length);
+            Interlocked.Increment(ref _rxPackets);
+            return (packetId, payload);
         }
+        catch (OperationCanceledException) { return (0xFFFF, []); }
+        catch { return (0xFFFF, []); }
         finally
         {
-            pooled.Dispose();
+            if (header is not null) ArrayPool<byte>.Shared.Return(header);
         }
     }
 
