@@ -273,6 +273,11 @@ public sealed class FractatrixConnection
     public static T Deserialize<T>(byte[] payload) =>
         MessagePackSerializer.Deserialize<T>(payload, MsgOpts);
 
+    /// <summary>Deserialize from a memory slice (zero-copy). Used by handlers that
+    /// receive <see cref="ReadOnlyMemory{Byte}"/> from the router hot path.</summary>
+    public static T Deserialize<T>(ReadOnlyMemory<byte> payload) =>
+        MessagePackSerializer.Deserialize<T>(payload, MsgOpts);
+
     /// <summary>Deserialize from a pooled payload slice (zero-copy).</summary>
     public static T Deserialize<T>(PooledPayload payload) =>
         MessagePackSerializer.Deserialize<T>(

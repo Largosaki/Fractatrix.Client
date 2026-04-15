@@ -134,7 +134,7 @@ public sealed class AuthFlow : IDisposable
 
     // ── Packet handlers ──────────────────────────────────────────────────
 
-    private void OnHandshakeResponse(byte[] payload)
+    private void OnHandshakeResponse(ReadOnlyMemory<byte> payload)
     {
         try
         {
@@ -144,7 +144,7 @@ public sealed class AuthFlow : IDisposable
         catch (Exception ex) { _log?.Invoke($"[AuthFlow] HandshakeResponse parse error: {ex.Message}"); }
     }
 
-    private void OnAuthResponse(byte[] payload)
+    private void OnAuthResponse(ReadOnlyMemory<byte> payload)
     {
         try
         {
@@ -154,7 +154,7 @@ public sealed class AuthFlow : IDisposable
         catch (Exception ex) { _log?.Invoke($"[AuthFlow] AuthResponse parse error: {ex.Message}"); }
     }
 
-    private void OnKeepAlive(byte[] payload)
+    private void OnKeepAlive(ReadOnlyMemory<byte> payload)
     {
         try
         {
@@ -172,7 +172,7 @@ public sealed class AuthFlow : IDisposable
         catch (Exception ex) { _log?.Invoke($"[AuthFlow] KeepAlive parse error: {ex.Message}"); }
     }
 
-    private void OnDisconnectPacket(byte[] payload)
+    private void OnDisconnectPacket(ReadOnlyMemory<byte> payload)
     {
         try
         {
