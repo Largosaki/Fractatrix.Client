@@ -14,12 +14,20 @@ using Fractatrix.Shared.Packets;
 /// </summary>
 public sealed class RegistrySyncHandler
 {
-    private readonly ClientBlockRegistry _registry;
-    private readonly Action<string>?     _log;
+    private readonly ClientBlockRegistry      _blocks;
+    private readonly ClientEntityTypeRegistry _entities;
+    private readonly ClientGuiSchemaRegistry  _guis;
+    private readonly Action<string>?          _log;
 
-    public RegistrySyncHandler(ClientBlockRegistry registry, Action<string>? log = null)
+    public RegistrySyncHandler(
+        ClientBlockRegistry      blocks,
+        ClientEntityTypeRegistry entities,
+        ClientGuiSchemaRegistry  guis,
+        Action<string>? log = null)
     {
-        _registry = registry;
+        _blocks   = blocks;
+        _entities = entities;
+        _guis     = guis;
         _log      = log;
     }
 
@@ -42,8 +50,13 @@ public sealed class RegistrySyncHandler
             return;
         }
 
-        _registry.ApplySnapshot(packet);
-        _log?.Invoke($"[RegistrySync] {packet.Blocks.Length} blocks, v={SafeHead(packet.RegistryVersion, 8)}");
+        _blocks.ApplySnapshot(packet);
+        _entities.ApplySnapshot(packet.Entities, packet.RegistryVersion);
+        _guis.ApplySnapshot(packet.GuiSchemas, packet.RegistryVersion);
+
+        _log?.Invoke(
+            $"[RegistrySync] blocks={packet.Blocks.Length} entities={packet.Entities.Length} " +
+            $"guis={packet.GuiSchemas.Length} v={SafeHead(packet.RegistryVersion, 8)}");
     }
 
     private static string SafeHead(string s, int n) =>
