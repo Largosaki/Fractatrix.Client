@@ -54,6 +54,13 @@ public sealed class ClientBlockRegistry
 
     public int Count => _byId.Count;
 
+    /// <summary>
+    /// Fires synchronously after each successful <see cref="ApplySnapshot"/>.
+    /// Subscribers (e.g. BlockColorTable, ChunkMeshBuilder caches) can rebuild
+    /// their id-indexed views here. Called on the dispatch thread.
+    /// </summary>
+    public event Action? OnSnapshotApplied;
+
     /// <summary>Replace the registry contents with a new snapshot from the server.</summary>
     public void ApplySnapshot(RegistrySyncPacket packet)
     {
@@ -65,6 +72,7 @@ public sealed class ClientBlockRegistry
             _byName[e.Name] = e;
         }
         _version = packet.RegistryVersion;
+        OnSnapshotApplied?.Invoke();
     }
 
     public bool IsKnown(int id)        => _byId.ContainsKey(id);
