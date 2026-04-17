@@ -50,14 +50,34 @@ public sealed class EntityStore : IDisposable
     public event Action<EntityRecord>? OnMove;
     public event Action<EntityRecord, byte>? OnDespawn; // arg2 = DespawnReason
 
+    private readonly ClientEntityTypeRegistry? _typeRegistry;
+
     public EntityStore(ClientPacketRouter router, Action<string>? log = null)
+        : this(router, typeRegistry: null, log: log) { }
+
+    public EntityStore(ClientPacketRouter router, ClientEntityTypeRegistry? typeRegistry, Action<string>? log = null)
     {
-        _router = router;
-        _log = log;
+        _router       = router;
+        _typeRegistry = typeRegistry;
+        _log          = log;
         _router.Register(PacketIds.EntitySpawn, HandleSpawn);
         _router.Register(PacketIds.EntityMove, HandleMove);
         _router.Register(PacketIds.EntityDespawn, HandleDespawn);
     }
+
+    /// <summary>
+    /// Resolve a wire-level <see cref="EntityRecord.EntityType"/> ushort to the stable
+    /// namespaced name via the attached <see cref="ClientEntityTypeRegistry"/>.
+    /// Returns <see cref="ClientEntityTypeRegistry.UnknownName"/> when no registry is
+    /// attached or the id is not present in the current snapshot.
+    /// </summary>
+    public string GetTypeName(ushort entityType) =>
+        _typeRegistry is null
+            ? ClientEntityTypeRegistry.UnknownName
+            : _typeRegistry.GetEntry((int)entityType).Name;
+
+    /// <summary>Convenience overload for an <see cref="EntityRecord"/>.</summary>
+    public string GetTypeName(EntityRecord rec) => GetTypeName(rec.EntityType);
 
     public void Dispose()
     {
