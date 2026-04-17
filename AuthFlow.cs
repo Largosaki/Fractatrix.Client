@@ -79,7 +79,7 @@ public sealed class AuthFlow : IDisposable
     /// open and the receive loop must already be dispatching packets to the router
     /// passed to the constructor (otherwise this call will block until timeout).
     /// </summary>
-    public async Task<AuthResult> RunAsync(string playerName, string token, CancellationToken ct = default)
+    public async Task<AuthResult> RunAsync(string playerName, string token, string language = "", CancellationToken ct = default)
     {
         _hsTcs = new TaskCompletionSource<HandshakeResponsePacket>(TaskCreationOptions.RunContinuationsAsynchronously);
         _authTcs = new TaskCompletionSource<AuthResponsePacket>(TaskCreationOptions.RunContinuationsAsynchronously);
@@ -97,7 +97,8 @@ public sealed class AuthFlow : IDisposable
             await _conn.SendAsync(new HandshakeRequestPacket
             {
                 ProtocolVersion = Constants.ProtocolVersion,
-                PlayerName = playerName,
+                PlayerName      = playerName,
+                Language        = language,
             }, ct);
         }
         catch (Exception ex)
